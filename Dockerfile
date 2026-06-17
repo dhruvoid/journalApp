@@ -1,9 +1,11 @@
-FROM amazoncorretto:26-alpine
+FROM amazoncorretto:21-alpine
 
 WORKDIR /app
 
-COPY target/*.jar app.jar
+COPY . .
+
+RUN ./mvnw clean package -DskipTests
 
 EXPOSE 8080
 
-ENTRYPOINT ["java","-jar","app.jar"]
+CMD ["java","-jar","target/*.jar"]
